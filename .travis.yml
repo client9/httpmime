@@ -1,0 +1,15 @@
+sudo: false
+dist: trusty
+language: go
+git:
+  depth: 1
+
+# order here is interesting
+# build is first since it fails build immediately if the code doesn't compile.
+# the setup which installs golang linting tools.  No need to run these
+# if the code doesn't build.
+# finally it runs lint
+script:
+  - make build
+  - make setup
+  - make lint
